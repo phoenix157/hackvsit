@@ -1,6 +1,6 @@
 # Flock Scraps
 
-A [Flock][] app to save scraps of text for your conversations. Built using [FlockOS][].
+A [Flock][] app to save scraps of text for your conversations. Built using [FlockOS][] and its [node.js sdk][].
 
 The app installs a [slash command][] that allows users to save scraps of text,
 
@@ -97,6 +97,7 @@ See [store.js](store.js) for more details.
 
 [flock]: https://flock.co
 [flockos]: https://docs.flock.co
+[node.js sdk]: https://github.com/flockchat/flockos-node-sdk
 [ngrok]: https://ngrok.com
 [events]: https://docs.flock.co/display/flockos/Events
 [slash command]: https://docs.flock.co/display/flockos/Slash+Commands
