@@ -85,6 +85,8 @@ A chat tab button is installed to see the list of scraps per
 conversation. Clicking on it launches a sidebar with the URL `https://<your public
 endpoint>/scraps`.
 
+See [index.js](index.js) for the annotated source code.
+
 ## In-Memory Database
 
 The app uses in memory objects to persist tokens and scraps. On exit, these objects are
