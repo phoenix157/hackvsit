@@ -34,14 +34,14 @@ developer dashboard. After creating the app, provide the following in the
 advanced info section:
 
 * Event listener URL -- your app will receive [events][] on this URL. Set this to
-  `<your public endpoint>/events`.
+  `https://<your public endpoint>/events`.
 
 * Slash command -- configure your slash command. Set the name of the command to
   `scrap` (or anything else to your liking -- here we assume that this is what
   you've used). Provide a description and select the action "Send to event listener".
 
 * Chat tab button -- Provide a tooltip text, select action "Open widget", and
-  desktop type to "Sidebar". Set the action URL to `<your public
+  desktop type to "Sidebar". Set the action URL to `https://<your public
   endpoint>/scraps`.
 
 Save your changes. After saving them, you will be provided with your app id and
@@ -69,7 +69,7 @@ node index.js
 
 ## How it works
 
-The app listens for these two events on the event listener URL (`<your public
+The app listens for these two events on the event listener URL (`https://<your public
 endpoint>/events`):
 
 * [app.install][] -- on receiving this event, the app saves the user id and
@@ -82,8 +82,8 @@ endpoint>/events`):
   has installed the app.
 
 A chat tab button is installed to see the list of scraps per
-conversation. Clicking on it launches a sidebar with the URL '<your public
-endpoint>/scraps'.
+conversation. Clicking on it launches a sidebar with the URL `https://<your public
+endpoint>/scraps`.
 
 ## In-Memory Database
 
