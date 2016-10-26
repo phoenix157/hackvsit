@@ -1,0 +1,17 @@
+{
+  "name": "flock-scraps",
+  "version": "0.0.1",
+  "description": "Save text scraps in Flock",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chaitanya Gupta",
+  "license": "ISC",
+  "dependencies": {
+    "flockos": "flockchat/flockos-node-sdk#0.0.3",
+    "express": "^4.14.0",
+    "mustache": "^2.2.1",
+    "request": "^2.74.0"
+  }
+}
