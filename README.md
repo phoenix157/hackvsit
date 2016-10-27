@@ -9,7 +9,7 @@ The app installs a [slash command][] that allows users to save scraps of text,
 and a [chat tab button][] that launches a sidebar [widget][] which lists all the
 scraps for a conversation.
 
-![sidebar](images/sidebar.png)
+![chat tab button and sidebar](images/chat-tab-button-and-sidebar.png)
 
 ## Download and Installation
 
