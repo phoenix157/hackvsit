@@ -34,15 +34,15 @@ developer dashboard. After creating the app, provide the following in the
 advanced info section:
 
 * Event listener URL -- your app will receive [events][] on this URL. Set this to
-  `https://<your public endpoint>/events`.
+  `https://<your-public-endpoint>/events`.
 
 * Slash command -- configure your slash command. Set the name of the command to
   `scrap` (or anything else to your liking -- here we assume that this is what
   you've used). Provide a description and select the action "Send to event listener".
 
-* Chat tab button -- Provide a tooltip text, select action "Open widget", and
-  desktop type to "Sidebar". Set the action URL to `https://<your public
-  endpoint>/scraps`.
+* Chat tab button -- Provide a tooltip text, select action "Open
+  widget", and desktop type to "Sidebar". Set the action URL to
+  `https://<your-public-endpoint>/scraps`.
 
 Save your changes. After saving them, you will be provided with your app id and
 app secret (click "Show" next to the app secret to see it).
@@ -67,10 +67,16 @@ Now start the app:
 node index.js
 ```
 
+To test the app, you need to install it into your account. You can
+install the app by clicking on the "Install" button on the app page in
+the developer dashboard. Make sure the app is running when you click
+on "Install". For details, see [How do I install and test my
+app?](https://docs.flock.co/display/flockos/Creating+an+App#CreatinganApp-AppInstallation).
+
 ## How it works
 
-The app listens for these two events on the event listener URL (`https://<your public
-endpoint>/events`):
+The app listens for these two events on the event listener URL
+i.e. `https://<your-public-endpoint>/events`:
 
 * [app.install][] -- on receiving this event, the app saves the user id and
   token in an in-memory database.
@@ -78,12 +84,12 @@ endpoint>/events`):
 * [client.slashCommand][] -- on receiving this event, the app saves the scrap in
   an in-memory database. It also sends a message to all members of the
   conversation on behalf of the user that a new scrap has been created. To send
-  the message, it needs the token received on `app.install` for each user who
+  the message, it uses the token received on `app.install` for each user who
   has installed the app.
 
 A chat tab button is installed to see the list of scraps per
-conversation. Clicking on it launches a sidebar with the URL `https://<your public
-endpoint>/scraps`.
+conversation. Clicking on it launches a sidebar with the URL
+`https://<your-public-endpoint>/scraps`.
 
 See [index.js](index.js) for the annotated source code.
 
