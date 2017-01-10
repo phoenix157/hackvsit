@@ -9,7 +9,7 @@
   "author": "Chaitanya Gupta",
   "license": "ISC",
   "dependencies": {
-    "flockos": "flockchat/flockos-node-sdk#0.0.3",
+    "flockos": "^0.0.5",
     "express": "^4.14.0",
     "mustache": "^2.2.1",
     "request": "^2.74.0"
