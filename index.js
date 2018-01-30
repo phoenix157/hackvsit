@@ -186,7 +186,7 @@ app.get('/scraps', function (req, res) {
         if(!error)
         {
             console.log('response ='+ JSON.stringify(response));
-            grouplist = response[2];
+            store.saveGroup(response);
             
         }
         else{
@@ -196,7 +196,7 @@ app.get('/scraps', function (req, res) {
     );
     // console.log('json ' + channels);
     res.set('Content-Type', 'text/html');
-    console.log('Grouplist = ', JSON.stringify(grouplist));
+    console.log('Grouplist = ', JSON.stringify(store.returnGroup());
     // var list = store.listScraps(userId, event.chat);
     // console.log('list: ', list);
     // if (list) {

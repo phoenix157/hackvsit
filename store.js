@@ -2,6 +2,8 @@ var fs = require('fs');
 var db = 'scraps.json';
 var userTokens = {};
 var user= [];
+var groupinfo = {};
+
 
 exports.getUserToken = function (userId) {
     return userTokens[userId];
@@ -14,6 +16,14 @@ exports.getid = function () {
 // exports.removeuser = function (userid) {
 
 // }
+
+exports.saveGroup = function(res) {
+    groupinfo = res[2];
+}
+
+exports.returnGroup = function(){
+    return groupinfo;
+}
 
 exports.saveUserToken = function (userId, token) {
     userTokens[userId] = token;
