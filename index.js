@@ -18,13 +18,13 @@ var app = express();
 // since we use express, we can simply use the token verifier
 // middleware to ensure that all event tokens are valid
 app.use(flock.events.tokenVerifier);
-const ipMiddleware = (req,res,next) => {
-    const clientip = ip.getClientIp(req);
-    console.log(clientip);
-    next();
-}
+// const ipMiddleware = (req,res,next) => {
+//     const clientip = ip.getClientIp(req);
+//     console.log(clientip);
+//     next();
+// }
 
-app.use(ipMiddleware);
+// app.use(ipMiddleware);
 app.get('/',function(req, res){
   res.send('works!');
 });
@@ -35,7 +35,10 @@ app.post('/events', flock.events.listener);
 // in the in-memory database
 flock.events.on('app.install', function (event) {
     store.saveUserToken(event.userId, event.token);
+
 });
+
+
 
 // listen for client.slashCommand, this gives us the scrap entered by
 // the user in the "text" property of the event. This text is saved in
@@ -46,6 +49,9 @@ flock.events.on('app.install', function (event) {
 // possible using plain text. This FlockML makes use of the <action>
 // tag to open the list of scraps in a sidebar widget. See
 // message.mustache.flockml.
+
+
+
 var messageTemplate = require('fs').readFileSync('message.mustache.flockml', 'utf8');
 flock.events.on('client.slashCommand', function (event) {
     store.saveScrap(event.userId, event.chat, event.text);
@@ -62,6 +68,16 @@ flock.events.on('client.slashCommand', function (event) {
             console.log('error sending message: ' + error);
         }
     });
+    flock.callMethod('chat.sendMessage',config.botToken, {
+        to: event.chat,
+        text: hello
+    }, function(error,response) {
+        if (!error) {
+            console.log('uid for message: ' + response.uid);
+        } else {
+            console.log('error sending message: ' + error);
+        }
+    })
 });
 
 // The widget path is /scraps. The userId and chat properties of the
