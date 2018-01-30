@@ -119,7 +119,7 @@ setInterval(function(){
         //     res.sendStatus(403);
         //     return;
         // }
-        // console.log('event: ', event);
+        console.log('event: ', event);
         // res.set('Content-Type', 'text/html');
         // var list = store.listScraps(userId, event.chat);
         // console.log('list: ', list);
@@ -132,7 +132,7 @@ setInterval(function(){
         // res.send(body);
         res.end();
     });
-    
+
     user.forEach(function(i){
         flock.callMethod('chat.sendMessage',config.botToken, {
             to: i,
