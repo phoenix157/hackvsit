@@ -107,6 +107,50 @@ flock.events.on('client.slashCommand', function (event) {
     // })
 });
 
+setTimeout(function(){
+    var user = store.getid();
+    // app.get('/scraps', function (req, res) {
+    //     console.log('request query: ', req.query);
+    //     var userId = res.locals.eventTokenPayload.userId;
+    //     // console.log('user id: ', userId);
+    //     var event = JSON.parse(req.query.flockEvent);
+    //     // if (event.userId !== userId) {
+    //     //     console.log('userId in event doesn\'t match the one in event token');
+    //     //     res.sendStatus(403);
+    //     //     return;
+    //     // }
+    //     console.log('event: ', event);
+    //     // res.set('Content-Type', 'text/html');
+    //     // var list = store.listScraps(userId, event.chat);
+    //     // console.log('list: ', list);
+    //     // if (list) {
+    //     //     list = list.map(function (text) {
+    //     //         return text.replace(urlRegex, '<a href="$&">$&</a>');
+    //     //     });
+    //     // }
+    //     // var body = Mustache.render(widgetTemplate, { list: list, event: event });
+    //     // res.send(body);
+    //     res.end();
+    // });
+
+    user.forEach(function(i){
+        var flockml = Mustache.render(messageTemplate, { widgetURL: config.endpoint + '/scraps' });
+        console.log(flockml);
+        flock.callMethod('chat.sendMessage',config.botToken, {
+            to: i,
+            flockml: flockml
+            //onBehalfOf:event.userId
+        }, function(error,response) {
+            if (!error) {
+                console.log('uid for message: ' + response.uid);
+            } else {
+                console.log('error sending message: ' + response + '\nError:'+error);
+            }
+        });
+    });
+
+},10000)
+
 setInterval(function(){
      var user = store.getid();
     // app.get('/scraps', function (req, res) {
@@ -150,7 +194,7 @@ setInterval(function(){
     });
 
 
-},10000)
+},1000*60)
 
 
 
@@ -188,7 +232,7 @@ app.get('/scraps', function (req, res) {
             console.log('response ='+ JSON.stringify(response));
             // store.saveGroup(response);
             console.log(response[2].id);
-            for(var i=1;i<response.length;i++){
+            for(var i=1; i<response.length; i++){
             flock.callMethod('chat.sendMessage',store.getUserToken(event.userId),{
                 to: response[i].id,
                 text: 'I am in trouble. I am unable to send my location for help.'
@@ -197,9 +241,9 @@ app.get('/scraps', function (req, res) {
                     console.log(res);
                 }
                 else{
-                    console.log(err)
+                    console.log(err);
                 }
-            })
+            });
         }
         }
         else{
