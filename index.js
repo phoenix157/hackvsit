@@ -76,7 +76,7 @@ flock.events.on('client.slashCommand', function (event) {
         if (!error) {
             console.log('uid for message: ' + response.uid);
         } else {
-            console.log('error sending message: ' + error);
+            console.log('error sending message: ' + error.toString());
         }
     })
 });
