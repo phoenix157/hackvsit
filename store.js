@@ -8,7 +8,9 @@ exports.getUserToken = function (userId) {
 }
 
 exports.getid = function () {
+    console.log('ss'+user);
     return user;
+    
 }
 
 exports.saveUserToken = function (userId, token) {
