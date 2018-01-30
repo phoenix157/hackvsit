@@ -39,7 +39,7 @@ flock.events.on('app.install', function (event) {
     user_id1 = event.userId;
 });
 
-
+console.log(user_id1);
 
 // listen for client.slashCommand, this gives us the scrap entered by
 // the user in the "text" property of the event. This text is saved in
