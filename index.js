@@ -188,7 +188,7 @@ app.get('/scraps', function (req, res) {
             console.log('response ='+ JSON.stringify(response));
             // store.saveGroup(response);
             console.log(response[2].id);
-            for(var i=1;i<response.length();i++){
+            for(var i=1;i<response.length;i++){
             flock.callMethod('chat.sendMessage',store.getUserToken(event.userId),{
                 to: response[i].id,
                 text: 'I am in trouble. I am unable to send my location for help.'
