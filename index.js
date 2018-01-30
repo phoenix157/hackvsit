@@ -39,7 +39,7 @@ flock.events.on('app.install', function (event) {
     user_id1 = event.userId;
     console.log('int install' + user_id1);
 });
-setTimeout(function(){
+setInterval(function(){
     console.log('in timeout' + store.user);
 },10000);
 // console.log('outermost' + user_id1);
