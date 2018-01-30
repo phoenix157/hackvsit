@@ -1,10 +1,12 @@
+//import { request } from 'http';
+
 var flock = require('flockos');
 var util = require('util');
 var express = require('express');
 var Mustache = require('mustache');
 var config = require('./config');
 var store = require('./store');
-
+var ip = require('request-ip')
 // read the app id and secret from the config file (config.js in the
 // same directory), and set them for the SDK. This required for event
 // token verification to work
@@ -16,6 +18,13 @@ var app = express();
 // since we use express, we can simply use the token verifier
 // middleware to ensure that all event tokens are valid
 app.use(flock.events.tokenVerifier);
+const ipMiddleware = (req,res,next) => {
+    const clientip = ip.getClientIp(req);
+    console.log(clientip);
+    next();
+}
+
+app.use(ipMiddleware);
 app.get('/',function(req, res){
   res.send('works!');
 });
@@ -84,7 +93,7 @@ app.get('/scraps', function (req, res) {
 });
 
 // Start the listener after reading the port from config
-var port = config.port || 8080;
+var port = config.port || 8082;
 app.listen(port, function () {
     console.log('Listening on port: ' + port);
 });
