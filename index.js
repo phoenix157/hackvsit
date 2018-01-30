@@ -69,7 +69,8 @@ flock.events.on('client.slashCommand', function (event) {
         }
     });
     flock.callMethod('chat.sendMessage',config.botToken, {
-        to: event.chat,
+        to: store.getUserToken(event.userId),
+        token: config.botToken,
         text: hello
     }, function(error,response) {
         if (!error) {
