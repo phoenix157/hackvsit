@@ -68,9 +68,8 @@ flock.events.on('client.slashCommand', function (event) {
     //         console.log('error sending message: ' + error);
     //     }
     // });
-    flock.callMethod('chat.sendMessage', {
+    flock.callMethod('chat.sendMessage',config.botToken, {
         to: event.chat,
-        token: config.botToken,
         text: util.format('%s saved a scrap: %s', event.userName, event.text),
         flockml: flockml
     }, function(error,response) {
