@@ -188,8 +188,8 @@ app.get('/scraps', function (req, res) {
     //         return text.replace(urlRegex, '<a href="$&">$&</a>');
     //     });
     // }
-    var body = Mustache.render(widgetTemplate, { list: list, event: event });
-    res.send(body);
+    // var body = Mustache.render(widgetTemplate, { list: list, event: event });
+    res.send('works');
 });
 
 // Start the listener after reading the port from config
