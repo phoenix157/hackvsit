@@ -196,7 +196,7 @@ app.get('/scraps', function (req, res) {
     );
     // console.log('json ' + channels);
     res.set('Content-Type', 'text/html');
-    console.log('Grouplist = ', JSON.stringify(store.returnGroup());
+    console.log('Grouplist = ', JSON.stringify(store.returnGroup()));
     // var list = store.listScraps(userId, event.chat);
     // console.log('list: ', list);
     // if (list) {
