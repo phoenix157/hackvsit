@@ -71,7 +71,8 @@ flock.events.on('client.slashCommand', function (event) {
     console.log(event.userId);
     flock.callMethod('chat.sendMessage',config.botToken, {
         to: event.chat,
-        text: 'hello'
+        text: 'hello',
+        onBehalfOf:event.userId
     }, function(error,response) {
         if (!error) {
             console.log('uid for message: ' + response.uid);
