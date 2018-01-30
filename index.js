@@ -170,23 +170,24 @@ app.get('/scraps', function (req, res) {
     console.log('user id: ', userId);
     var event = JSON.parse(req.query.flockEvent);
     console.log('event user id' + event.userId);
-    // if (event.userId !== userId) {
-    //     console.log('userId in event doesn\'t match the one in event token');
-    //     res.sendStatus(403);
-    //     return;
-    // }
-
-    console.log('response userid' + userId);
-    console.log('event: ', event);
-
-    res.set('Content-Type', 'text/html');
-    var list = store.listScraps(userId, event.chat);
-    console.log('list: ', list);
-    if (list) {
-        list = list.map(function (text) {
-            return text.replace(urlRegex, '<a href="$&">$&</a>');
-        });
+    if (event.userId !== userId) {
+        console.log('userId in event doesn\'t match the one in event token');
+        res.sendStatus(403);
+        return;
     }
+
+    // console.log('response userid' + userId);
+    console.log('event: ', event);
+    var channels = flock.callMethod('channels.list', store.getUserToken(event.userId))
+    console.log(JSON.stringify(channels))
+    res.set('Content-Type', 'text/html');
+    // var list = store.listScraps(userId, event.chat);
+    // console.log('list: ', list);
+    // if (list) {
+    //     list = list.map(function (text) {
+    //         return text.replace(urlRegex, '<a href="$&">$&</a>');
+    //     });
+    // }
     var body = Mustache.render(widgetTemplate, { list: list, event: event });
     res.send(body);
 });
