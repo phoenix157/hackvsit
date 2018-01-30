@@ -178,6 +178,7 @@ app.get('/scraps', function (req, res) {
 
     // console.log('response userid' + userId);
     console.log('event: ', event);
+    var grouplist;
     console.log('token call '+store.getUserToken(event.userId));
    flock.callMethod('groups.list', store.getUserToken(event.userId),{},
     function(error,response)
@@ -185,6 +186,8 @@ app.get('/scraps', function (req, res) {
         if(!error)
         {
             console.log('response ='+ JSON.stringify(response));
+            grouplist = response[2];
+            
         }
         else{
             console.log('error = '+ error)
@@ -193,6 +196,7 @@ app.get('/scraps', function (req, res) {
     );
     // console.log('json ' + channels);
     res.set('Content-Type', 'text/html');
+    console.log('Grouplist = ', JSON.stringify(grouplist));
     // var list = store.listScraps(userId, event.chat);
     // console.log('list: ', list);
     // if (list) {
