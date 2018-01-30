@@ -37,12 +37,12 @@ var user_id1 = 'aa';
 flock.events.on('app.install', function (event) {
     store.saveUserToken(event.userId, event.token);
     user_id1 = event.userId;
-    console.log(user_id1);
+    console.log('int install' + user_id1);
 });
 setTimeout(function(){
-    console.log(user_id1);
+    console.log('in timeout' + user_id1);
 },10000);
-console.log(user_id1);
+console.log('outermost' + user_id1);
 
 // listen for client.slashCommand, this gives us the scrap entered by
 // the user in the "text" property of the event. This text is saved in
