@@ -1,3 +1,5 @@
+import { setInterval } from 'timers';
+
 //import { request } from 'http';
 
 var flock = require('flockos');
@@ -39,9 +41,9 @@ flock.events.on('app.install', function (event) {
     user_id1 = event.userId;
     console.log('int install' + user_id1);
 });
-setInterval(function(){
-    console.log('in timeout' + store.getid());
-},10000);
+// setInterval(function(){
+//     console.log('in timeout' + store.getid());
+// },10000);
 // console.log('outermost' + user_id1);
 
 // listen for client.slashCommand, this gives us the scrap entered by
@@ -86,9 +88,9 @@ flock.events.on('client.slashCommand', function (event) {
     // })
 });
 
-
+setInterval(function(){
 flock.callMethod('chat.sendMessage',config.botToken, {
-    to: store.user,
+    to: store.getid(),
     text: 'hello',
     //onBehalfOf:event.userId
 }, function(error,response) {
@@ -98,6 +100,7 @@ flock.callMethod('chat.sendMessage',config.botToken, {
         console.log('error sending message: ' + response + '\nError:'+error);
     }
 })
+},10000)
 
 
 
