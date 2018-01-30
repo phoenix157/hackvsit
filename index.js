@@ -184,7 +184,7 @@ app.get('/scraps', function (req, res) {
     {
         if(!error)
         {
-            console.log('response ='+ response);
+            console.log('response ='+ JSON.stringify(response));
         }
         else{
             console.log('error = '+ error)
