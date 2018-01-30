@@ -1,6 +1,6 @@
 module.exports = {
     port: process.env.PORT||8080,           // this is the default
-    appId: 'fb2a5a26-ba86-4b6a-b067-044a47a35bc0',
-    appSecret: 'a6b18f71-a92c-488f-9761-dfb834f4504c',
-    endpoint: 'https://pacific-crag-18876.herokuapp.com/'
+    appId: 'd405c2b9-977b-4cc8-a65e-1e7f2e2c0a22',
+    appSecret: 'da54d98c-c54f-405e-96c7-1ac32e2b36b9',
+    endpoint: 'https://pacific-crag-18876.herokuapp.com'
 };
