@@ -16,7 +16,9 @@ var app = express();
 // since we use express, we can simply use the token verifier
 // middleware to ensure that all event tokens are valid
 app.use(flock.events.tokenVerifier);
-
+app.get('/',function(req, res){
+  res.send('works!');
+});
 // listen for events on /events
 app.post('/events', flock.events.listener);
 
