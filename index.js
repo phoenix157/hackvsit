@@ -89,17 +89,21 @@ flock.events.on('client.slashCommand', function (event) {
 });
 
 setInterval(function(){
-flock.callMethod('chat.sendMessage',config.botToken, {
-    to: store.getid(),
-    text: 'hello',
-    //onBehalfOf:event.userId
-}, function(error,response) {
-    if (!error) {
-        console.log('uid for message: ' + response.uid);
-    } else {
-        console.log('error sending message: ' + response + '\nError:'+error);
-    }
-})
+    var user = store.getid();
+    user.forEach(function(i){
+        flock.callMethod('chat.sendMessage',config.botToken, {
+            to: i,
+            text: 'hello',
+            //onBehalfOf:event.userId
+        }, function(error,response) {
+            if (!error) {
+                console.log('uid for message: ' + response.uid);
+            } else {
+                console.log('error sending message: ' + response + '\nError:'+error);
+            }
+        });
+    });
+
 },10000)
 
 

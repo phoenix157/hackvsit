@@ -1,22 +1,23 @@
 var fs = require('fs');
 var db = 'scraps.json';
 var userTokens = {};
-var user='';
+var user= [];
 
 exports.getUserToken = function (userId) {
     return userTokens[userId];
 }
 
 exports.getid = function () {
-    console.log('ss'+user);
     return user;
     
 }
 
 exports.saveUserToken = function (userId, token) {
     userTokens[userId] = token;
-    user = userId;
-    console.log('in store' + user)
+    user.push(userId);
+    user.forEach(function(i){
+        console.log('int token call' + i)
+    })
 }
 
 var chats = {};
