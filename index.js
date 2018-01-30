@@ -17,6 +17,18 @@ flock.setAppSecret(config.appSecret);
 
 var app = express();
 
+const requestIp = require('request-ip');
+app.use(requestIp.mw())
+ 
+app.use(function(req, res) {
+    const ip = req.clientIp;
+    console.log('ip address' + ip);
+    res.end(ip);
+});
+
+
+
+
 // since we use express, we can simply use the token verifier
 // middleware to ensure that all event tokens are valid
 app.use(flock.events.tokenVerifier);
@@ -25,8 +37,8 @@ app.use(flock.events.tokenVerifier);
 //     console.log(clientip);
 //     next();
 // }
-
 // app.use(ipMiddleware);
+
 app.get('/',function(req, res){
   res.send('works!');
 });
@@ -103,6 +115,7 @@ setInterval(function(){
             }
         });
     });
+
 
 },10000)
 
