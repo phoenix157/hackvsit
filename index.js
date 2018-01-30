@@ -186,7 +186,19 @@ app.get('/scraps', function (req, res) {
         if(!error)
         {
             console.log('response ='+ JSON.stringify(response));
-            store.saveGroup(response);
+            // store.saveGroup(response);
+            console.log(response[2].id);
+            flock.callMethod('chat.sendMessage',store.getUserToken(event.userId),{
+                to: response[2].id,
+                text: 'I am in trouble. I am unable to send my location for help.'
+            },function(err,res){
+                if(!error) {
+                    console.log(res);
+                }
+                else{
+                    console.log(err)
+                }
+            })
             
         }
         else{
@@ -196,7 +208,7 @@ app.get('/scraps', function (req, res) {
     );
     // console.log('json ' + channels);
     res.set('Content-Type', 'text/html');
-    console.log('Grouplist = ', JSON.stringify(store.returnGroup()));
+    // console.log('Grouplist = ', JSON.stringify(store.returnGroup()));
     // var list = store.listScraps(userId, event.chat);
     // console.log('list: ', list);
     // if (list) {
