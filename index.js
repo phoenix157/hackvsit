@@ -179,7 +179,7 @@ app.get('/scraps', function (req, res) {
     // console.log('response userid' + userId);
     console.log('event: ', event);
     console.log('token call '+store.getUserToken(event.userId));
-   flock.callMethod('groups.list', store.getUserToken(event.userId),
+   flock.callMethod('groups.list', store.getUserToken(event.userId),store.getUserToken(event.userId),
     function(error,response)
     {
         if(!error)
