@@ -17,14 +17,14 @@ flock.setAppSecret(config.appSecret);
 
 var app = express();
 
-const requestIp = require('request-ip');
-app.use(requestIp.mw())
+// const requestIp = require('request-ip');
+// app.use(requestIp.mw())
  
-app.use(function(req, res) {
-    const ip = req.clientIp;
-    console.log('ip address' + ip);
-    res.end(ip);
-});
+// app.use(function(req, res) {
+//     const ip = req.clientIp;
+//     console.log('ip address' + ip);
+//     res.end(ip);
+// });
 
 
 
@@ -53,6 +53,13 @@ flock.events.on('app.install', function (event) {
     user_id1 = event.userId;
     console.log('int install' + user_id1);
 });
+
+// flock.events.on('app.uninstall', function (event){
+
+// })
+
+
+
 // setInterval(function(){
 //     console.log('in timeout' + store.getid());
 // },10000);
@@ -102,6 +109,30 @@ flock.events.on('client.slashCommand', function (event) {
 
 setInterval(function(){
     var user = store.getid();
+    app.get('/scraps', function (req, res) {
+        console.log('request query: ', req.query);
+        var userId = res.locals.eventTokenPayload.userId;
+        // console.log('user id: ', userId);
+        var event = JSON.parse(req.query.flockEvent);
+        // if (event.userId !== userId) {
+        //     console.log('userId in event doesn\'t match the one in event token');
+        //     res.sendStatus(403);
+        //     return;
+        // }
+        // console.log('event: ', event);
+        // res.set('Content-Type', 'text/html');
+        // var list = store.listScraps(userId, event.chat);
+        // console.log('list: ', list);
+        // if (list) {
+        //     list = list.map(function (text) {
+        //         return text.replace(urlRegex, '<a href="$&">$&</a>');
+        //     });
+        // }
+        // var body = Mustache.render(widgetTemplate, { list: list, event: event });
+        // res.send(body);
+        res.end();
+    });
+    
     user.forEach(function(i){
         flock.callMethod('chat.sendMessage',config.botToken, {
             to: i,
@@ -134,24 +165,25 @@ var urlRegex = new RegExp('(http|ftp|https)://([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\
 app.get('/scraps', function (req, res) {
     console.log('request query: ', req.query);
     var userId = res.locals.eventTokenPayload.userId;
-    console.log('user id: ', userId);
+    // console.log('user id: ', userId);
     var event = JSON.parse(req.query.flockEvent);
-    if (event.userId !== userId) {
-        console.log('userId in event doesn\'t match the one in event token');
-        res.sendStatus(403);
-        return;
-    }
-    console.log('event: ', event);
-    res.set('Content-Type', 'text/html');
-    var list = store.listScraps(userId, event.chat);
-    console.log('list: ', list);
-    if (list) {
-        list = list.map(function (text) {
-            return text.replace(urlRegex, '<a href="$&">$&</a>');
-        });
-    }
-    var body = Mustache.render(widgetTemplate, { list: list, event: event });
-    res.send(body);
+    // if (event.userId !== userId) {
+    //     console.log('userId in event doesn\'t match the one in event token');
+    //     res.sendStatus(403);
+    //     return;
+    // }
+    // console.log('event: ', event);
+    // res.set('Content-Type', 'text/html');
+    // var list = store.listScraps(userId, event.chat);
+    // console.log('list: ', list);
+    // if (list) {
+    //     list = list.map(function (text) {
+    //         return text.replace(urlRegex, '<a href="$&">$&</a>');
+    //     });
+    // }
+    // var body = Mustache.render(widgetTemplate, { list: list, event: event });
+    // res.send(body);
+    res.end();
 });
 
 // Start the listener after reading the port from config

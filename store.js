@@ -9,8 +9,11 @@ exports.getUserToken = function (userId) {
 
 exports.getid = function () {
     return user;
-    
 }
+
+// exports.removeuser = function (userid) {
+
+// }
 
 exports.saveUserToken = function (userId, token) {
     userTokens[userId] = token;
