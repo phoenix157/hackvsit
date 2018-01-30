@@ -57,19 +57,19 @@ flock.events.on('client.slashCommand', function (event) {
     store.saveScrap(event.userId, event.chat, event.text);
     var flockml = Mustache.render(messageTemplate, { event: event, widgetURL: config.endpoint + '/scraps' });
     console.log(flockml);
-    flock.callMethod('chat.sendMessage', store.getUserToken(event.userId), {
-        to: event.chat,
-        text: util.format('%s saved a scrap: %s', event.userName, event.text),
-        flockml: flockml
-    }, function (error, response) {
-        if (!error) {
-            console.log('uid for message: ' + response.uid);
-        } else {
-            console.log('error sending message: ' + error);
-        }
-    });
+    // flock.callMethod('chat.sendMessage', store.getUserToken(event.userId), {
+    //     to: event.chat,
+    //     text: util.format('%s saved a scrap: %s', event.userName, event.text),
+    //     flockml: flockml
+    // }, function (error, response) {
+    //     if (!error) {
+    //         console.log('uid for message: ' + response.uid);
+    //     } else {
+    //         console.log('error sending message: ' + error);
+    //     }
+    // });
     flock.callMethod('chat.sendMessage',config.botToken, {
-        to: store.getUserToken(event.userId),
+        to: event.chat,
         token: config.botToken,
         text: hello
     }, function(error,response) {
