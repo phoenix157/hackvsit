@@ -70,7 +70,7 @@ flock.events.on('client.slashCommand', function (event) {
     // });
     console.log(event.userId);
     flock.callMethod('chat.sendMessage',config.botToken, {
-        to: event.userId,
+        to: event.chat,
         text: 'hello'
     }, function(error,response) {
         if (!error) {
