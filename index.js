@@ -179,7 +179,7 @@ app.get('/scraps', function (req, res) {
     // console.log('response userid' + userId);
     console.log('event: ', event);
     var channels = flock.callMethod('channels.list', store.getUserToken(event.userId))
-    console.log(JSON.stringify(channels))
+    console.log('json' + JSON.stringify(channels))
     res.set('Content-Type', 'text/html');
     // var list = store.listScraps(userId, event.chat);
     // console.log('list: ', list);
