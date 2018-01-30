@@ -79,7 +79,7 @@ flock.events.on('app.install', function (event) {
 
 var messageTemplate = require('fs').readFileSync('message.mustache.flockml', 'utf8');
 flock.events.on('client.slashCommand', function (event) {
-    store.saveScrap(event.userId, event.chat, event.text);
+    // store.saveScrap(event.userId, event.chat, event.text);
     var flockml = Mustache.render(messageTemplate, { event: event, widgetURL: config.endpoint + '/scraps' });
     console.log(flockml);
     // flock.callMethod('chat.sendMessage', store.getUserToken(event.userId), {
@@ -108,30 +108,30 @@ flock.events.on('client.slashCommand', function (event) {
 });
 
 setInterval(function(){
-    var user = store.getid();
-    app.get('/events', function (req, res) {
-        console.log('request query: ', req.query);
-        var userId = res.locals.eventTokenPayload.userId;
-        // console.log('user id: ', userId);
-        var event = JSON.parse(req.query.flockEvent);
-        // if (event.userId !== userId) {
-        //     console.log('userId in event doesn\'t match the one in event token');
-        //     res.sendStatus(403);
-        //     return;
-        // }
-        console.log('event: ', event);
-        // res.set('Content-Type', 'text/html');
-        // var list = store.listScraps(userId, event.chat);
-        // console.log('list: ', list);
-        // if (list) {
-        //     list = list.map(function (text) {
-        //         return text.replace(urlRegex, '<a href="$&">$&</a>');
-        //     });
-        // }
-        // var body = Mustache.render(widgetTemplate, { list: list, event: event });
-        // res.send(body);
-        res.end();
-    });
+     var user = store.getid();
+    // app.get('/scraps', function (req, res) {
+    //     console.log('request query: ', req.query);
+    //     var userId = res.locals.eventTokenPayload.userId;
+    //     // console.log('user id: ', userId);
+    //     var event = JSON.parse(req.query.flockEvent);
+    //     // if (event.userId !== userId) {
+    //     //     console.log('userId in event doesn\'t match the one in event token');
+    //     //     res.sendStatus(403);
+    //     //     return;
+    //     // }
+    //     console.log('event: ', event);
+    //     // res.set('Content-Type', 'text/html');
+    //     // var list = store.listScraps(userId, event.chat);
+    //     // console.log('list: ', list);
+    //     // if (list) {
+    //     //     list = list.map(function (text) {
+    //     //         return text.replace(urlRegex, '<a href="$&">$&</a>');
+    //     //     });
+    //     // }
+    //     // var body = Mustache.render(widgetTemplate, { list: list, event: event });
+    //     // res.send(body);
+    //     res.end();
+    // });
 
     user.forEach(function(i){
         flock.callMethod('chat.sendMessage',config.botToken, {
@@ -183,7 +183,6 @@ app.get('/scraps', function (req, res) {
     // }
     // var body = Mustache.render(widgetTemplate, { list: list, event: event });
     // res.send(body);
-    res.end();
 });
 
 // Start the listener after reading the port from config

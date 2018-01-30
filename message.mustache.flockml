@@ -1,5 +1,6 @@
 <flockml>
   {{event.userName}} saved a scrap: {{event.text}}
   <br/>
-  <em><action type="openWidget" url="{{widgetURL}}" desktopType="sidebar" mobileType="modal">List of scraps</action></em>
+  If you are in trouble, send an SOS
+  <em><action type="openWidget" url="{{widgetURL}}" desktopType="sidebar" mobileType="modal">SOS</action></em>
 </flockml>
