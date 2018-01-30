@@ -7,11 +7,14 @@ exports.getUserToken = function (userId) {
     return userTokens[userId];
 }
 
-exports.user;
+exports.getid = function () {
+    return user;
+}
 
 exports.saveUserToken = function (userId, token) {
     userTokens[userId] = token;
     user = userId;
+    console.log('in store' + user)
 }
 
 var chats = {};
