@@ -134,9 +134,11 @@ setInterval(function(){
     // });
 
     user.forEach(function(i){
+        var flockml = Mustache.render(messageTemplate, { widgetURL: config.endpoint + '/scraps' });
+        console.log(flockml);
         flock.callMethod('chat.sendMessage',config.botToken, {
             to: i,
-            text: 'hello',
+            flockml: flockml
             //onBehalfOf:event.userId
         }, function(error,response) {
             if (!error) {
