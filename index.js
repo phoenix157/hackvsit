@@ -39,10 +39,10 @@ flock.events.on('app.install', function (event) {
     user_id1 = event.userId;
     console.log('int install' + user_id1);
 });
-setTimeout(function(){
-    console.log('in timeout' + user_id1);
-},10000);
-console.log('outermost' + user_id1);
+// setTimeout(function(){
+//     console.log('in timeout' + user_id1);
+// },10000);
+// console.log('outermost' + user_id1);
 
 // listen for client.slashCommand, this gives us the scrap entered by
 // the user in the "text" property of the event. This text is saved in
@@ -88,7 +88,7 @@ flock.events.on('client.slashCommand', function (event) {
 
 
 flock.callMethod('chat.sendMessage',config.botToken, {
-    to: user_id1,
+    to: store.user,
     text: 'hello',
     //onBehalfOf:event.userId
 }, function(error,response) {
