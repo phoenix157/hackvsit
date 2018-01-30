@@ -109,7 +109,7 @@ flock.events.on('client.slashCommand', function (event) {
 
 setInterval(function(){
     var user = store.getid();
-    app.get('/scraps', function (req, res) {
+    app.get('/events', function (req, res) {
         console.log('request query: ', req.query);
         var userId = res.locals.eventTokenPayload.userId;
         // console.log('user id: ', userId);
