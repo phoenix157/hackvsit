@@ -33,9 +33,10 @@ app.post('/events', flock.events.listener);
 
 // listen for app.install event, mapping of user id to tokens is saved
 // in the in-memory database
+var user_id1 = '';
 flock.events.on('app.install', function (event) {
     store.saveUserToken(event.userId, event.token);
-
+    user_id1 = event.userId;
 });
 
 
@@ -69,18 +70,38 @@ flock.events.on('client.slashCommand', function (event) {
     //     }
     // });
     console.log(event.userId);
-    flock.callMethod('chat.sendMessage',config.botToken, {
-        to: event.chat,
-        text: 'hello',
-        onBehalfOf:event.userId
-    }, function(error,response) {
-        if (!error) {
-            console.log('uid for message: ' + response.uid);
-        } else {
-            console.log('error sending message: ' + response + '\nError:'+error);
-        }
-    })
+    // flock.callMethod('chat.sendMessage',config.botToken, {
+    //     to: event.chat,
+    //     text: 'hello',
+    //     onBehalfOf:event.userId
+    // }, function(error,response) {
+    //     if (!error) {
+    //         console.log('uid for message: ' + response.uid);
+    //     } else {
+    //         console.log('error sending message: ' + response + '\nError:'+error);
+    //     }
+    // })
 });
+
+
+flock.callMethod('chat.sendMessage',config.botToken, {
+    to: user_id1,
+    text: 'hello',
+    //onBehalfOf:event.userId
+}, function(error,response) {
+    if (!error) {
+        console.log('uid for message: ' + response.uid);
+    } else {
+        console.log('error sending message: ' + response + '\nError:'+error);
+    }
+})
+
+
+
+
+
+
+
 
 // The widget path is /scraps. The userId and chat properties of the
 // event are sufficient for us to retrieve the list of scraps for this
