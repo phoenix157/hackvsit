@@ -92,6 +92,7 @@ var ee_scraped = JSON.parse(fs.readFileSync('eq-scraped.json'));
 var ff_scraped = JSON.parse(fs.readFileSync('ff-scraped.json'));
 var ts_scraped = JSON.parse(fs.readFileSync('ts-scraped.json'));
 var vl_scraped = JSON.parse(fs.readFileSync('volcano-scraped.json'));
+var dummy = {"timeAgo":"20 minutes ago.","eventDate":"January 31 2018 11:33 PM","magnitude":"4.0","continent":"Asia","country":"India","state":"Delhi","location":"Arthur's Pass","source":"GEONET","risk_volcano":"<img src=\"icon/volcano_non.jpg\" alt=\"Vulkán 0\" width=\"15\" height=\"15\"/>","risk_airp":"<img src=\"icon/airport2.jpg\" alt=\"There are airport(s) nearby the epicenter.\" width=\"15\" height=\"15\" border='0'/>","risk_npp":"<img src=\"icon/volcano_non.jpg\" alt=\"Vulkán 0\" width=\"15\" height=\"15\"/>","rid":"811023"}
 
 setInterval(function(){
     eq._eq(country);
@@ -169,7 +170,21 @@ setTimeout(function(){
     // });
     if(ff_scraped.length == 0 && ee_scraped.length == 0 && ts_scraped.length == 0 && vl_scraped.length == 0)
     {
-        
+        user.forEach(function(i){
+            var flockml = Mustache.render(messageTemplate, { category: "Earthquake",widgetURL: config.endpoint + '/scraps' });
+            console.log(flockml);
+            flock.callMethod('chat.sendMessage',config.botToken, {
+                to: i,
+                flockml: flockml
+                //onBehalfOf:event.userId
+            }, function(error,response) {
+                if (!error) {
+                    console.log('uid for message: ' + response.uid);
+                } else {
+                    console.log('error sending message: ' + response + '\nError:'+error);
+                }
+            });
+        });
     }
 
     else if(ff.scraped.length > 0){
