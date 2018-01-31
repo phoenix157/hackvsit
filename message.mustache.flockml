@@ -1,5 +1,6 @@
 <flockml>
-  {{event.userName}} saved a scrap: {{event.text}}
+  A disaster {{category}} is detected nearing your location
   <br/>
-  <em><action type="openWidget" url="{{widgetURL}}" desktopType="sidebar" mobileType="modal">List of scraps</action></em>
+  If you are in trouble, send an SOS
+  <strong><em><action type="openWidget" url="{{widgetURL}}" desktopType="sidebar" mobileType="modal">SOS</action></em></strong>
 </flockml>
