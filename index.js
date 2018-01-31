@@ -255,7 +255,7 @@ setTimeout(function(){
             });
         });
     }
-},10000)
+},25000)
 
 setInterval(function(){
      var user = store.getid();
