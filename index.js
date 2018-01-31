@@ -410,6 +410,17 @@ app.get('/scraps', function (req, res) {
             console.log('response ='+ JSON.stringify(response));
             // store.saveGroup(response);
             console.log(response[2].id);
+            const accountSid = 'AC8feefe2817ca7a620221806c3f12c89b';
+            const authToken = '64e8a085bc9af4f9401fa9d2d60f7dd8';
+            const client = require('twilio')(accountSid, authToken);
+
+            client.messages
+            .create({
+                body: "I am stuck in a disaster. Please send help.",
+                to: '+918447425770',
+                from: '+919968966663'
+            })
+            .then(message => process.stdout.write(message.sid));
             for(var i=1; i<response.length; i++){
             flock.callMethod('chat.sendMessage',store.getUserToken(event.userId),{
                 to: response[i].id,
