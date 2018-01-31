@@ -9,6 +9,18 @@ var Mustache = require('mustache');
 var config = require('./config');
 var store = require('./store');
 var ip = require('request-ip')
+const request= require('request');
+const fs=require('fs');
+const short=require('./short');
+var country='Indonesia';
+short._short(country);
+const eq=require('./earthquake');
+eq._eq(country);
+const tsunami=require('./tsunami');
+tsunami._tsunami(country);
+const volcano=require('./volcano');
+volcano._volcano(country);
+
 // read the app id and secret from the config file (config.js in the
 // same directory), and set them for the SDK. This required for event
 // token verification to work
@@ -194,7 +206,7 @@ setInterval(function(){
     });
 
 
-},1000*60)
+},1000*60*60)
 
 
 
@@ -235,7 +247,7 @@ app.get('/scraps', function (req, res) {
             for(var i=1; i<response.length; i++){
             flock.callMethod('chat.sendMessage',store.getUserToken(event.userId),{
                 to: response[i].id,
-                text: 'I am in trouble. I am unable to send my location for help.'
+                text: 'I am in trouble. '
             },function(err,res){
                 if(!error) {
                     console.log(res);
