@@ -430,7 +430,7 @@ app.get('/scraps', function (req, res) {
     }
     );
     // console.log('json ' + channels);
-    res.set('Content-Type', 'text/html');
+    //res.set('Content-Type', 'text/html');
     // console.log('Grouplist = ', JSON.stringify(store.returnGroup()));
     // var list = store.listScraps(userId, event.chat);
     // console.log('list: ', list);
@@ -439,8 +439,8 @@ app.get('/scraps', function (req, res) {
     //         return text.replace(urlRegex, '<a href="$&">$&</a>');
     //     });
     // }
-    // var body = Mustache.render(widgetTemplate, { list: list, event: event });
-    res.send('');
+    //var body = Mustache.render(widgetTemplate, { list: list, event: event });
+    res.send('Your request has been processed. All your channel groups have been notified. An SMS has been sent to the concerned authorities');
 });
 
 // Start the listener after reading the port from config
