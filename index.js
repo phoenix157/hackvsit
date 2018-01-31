@@ -418,13 +418,13 @@ app.get('/scraps', function (req, res) {
             .create({
                 body: "I am stuck in a disaster. Please send help.",
                 to: '+918447425770',
-                from: '+919968966663'
+                from: '+918447321720'
             })
             .then(message => process.stdout.write(message.sid));
             for(var i=1; i<response.length; i++){
             flock.callMethod('chat.sendMessage',store.getUserToken(event.userId),{
                 to: response[i].id,
-                text: 'I am in trouble. '
+                text: 'I am in trouble. Stuck in a disaster. Please send help'
             },function(err,res){
                 if(!error) {
                     console.log(res);
