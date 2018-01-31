@@ -11,15 +11,17 @@ var store = require('./store');
 var ip = require('request-ip')
 const request= require('request');
 const fs=require('fs');
-const short=require('./short');
+// const short=require('./short');
 var country='India';
-short._short(country);
+// short._short(country);
 const eq=require('./earthquake');
 eq._eq(country);
 const tsunami=require('./tsunami');
 tsunami._tsunami(country);
 const volcano=require('./volcano');
 volcano._volcano(country);
+const ff = require('./forest-fire');
+ff._ff(country);
 
 // read the app id and secret from the config file (config.js in the
 // same directory), and set them for the SDK. This required for event
@@ -86,8 +88,29 @@ flock.events.on('app.install', function (event) {
 // possible using plain text. This FlockML makes use of the <action>
 // tag to open the list of scraps in a sidebar widget. See
 // message.mustache.flockml.
+var ee_scraped = JSON.parse(fs.readFileSync('eq-scraped.json'));
+var ff_scraped = JSON.parse(fs.readFileSync('ff-scraped.json'));
+var ts_scraped = JSON.parse(fs.readFileSync('ts-scraped.json'));
+var vl_scraped = JSON.parse(fs.readFileSync('volcano-scraped.json'));
 
+setInterval(function(){
+    eq._eq(country);
+    tsunami._tsunami(country);
+    volcano._volcano(country);
+    ff._ff(country);
+     ee_scraped = JSON.parse(fs.readFileSync('eq-scraped.json'));
+     ff_scraped = JSON.parse(fs.readFileSync('ff-scraped.json'));
+     ts_scraped = JSON.parse(fs.readFileSync('ts-scraped.json'));
+     vl_scraped = JSON.parse(fs.readFileSync('volcano-scraped.json'));
+},1000*60*59)
 
+var scrap = {
+    'vl':'Volcano',
+    'ts':'Tsunami',
+    'ff':'Forest Fire',
+    'ee':'Earthquake'
+};
+var keys = ['vl','ts','ff','ee'];
 
 var messageTemplate = require('fs').readFileSync('message.mustache.flockml', 'utf8');
 flock.events.on('client.slashCommand', function (event) {
@@ -144,9 +167,14 @@ setTimeout(function(){
     //     // res.send(body);
     //     res.end();
     // });
+    if(ff_scraped.length == 0 && ee_scraped.length == 0 && ts_scraped.length == 0 && vl_scraped.length == 0)
+    {
+        
+    }
 
+    else if(ff.scraped.length > 0){
     user.forEach(function(i){
-        var flockml = Mustache.render(messageTemplate, { widgetURL: config.endpoint + '/scraps' });
+        var flockml = Mustache.render(messageTemplate, { category: "Forest Fire",widgetURL: config.endpoint + '/scraps' });
         console.log(flockml);
         flock.callMethod('chat.sendMessage',config.botToken, {
             to: i,
@@ -160,7 +188,58 @@ setTimeout(function(){
             }
         });
     });
-
+    }
+    else if(ee.scraped.length > 0){
+        user.forEach(function(i){
+            var flockml = Mustache.render(messageTemplate, { category: "Earthquake",widgetURL: config.endpoint + '/scraps' });
+            console.log(flockml);
+            flock.callMethod('chat.sendMessage',config.botToken, {
+                to: i,
+                flockml: flockml
+                //onBehalfOf:event.userId
+            }, function(error,response) {
+                if (!error) {
+                    console.log('uid for message: ' + response.uid);
+                } else {
+                    console.log('error sending message: ' + response + '\nError:'+error);
+                }
+            });
+        });
+    }
+    else if(vl.scraped.length > 0){
+        user.forEach(function(i){
+            var flockml = Mustache.render(messageTemplate, { category: "Volcano Eruption",widgetURL: config.endpoint + '/scraps' });
+            console.log(flockml);
+            flock.callMethod('chat.sendMessage',config.botToken, {
+                to: i,
+                flockml: flockml
+                //onBehalfOf:event.userId
+            }, function(error,response) {
+                if (!error) {
+                    console.log('uid for message: ' + response.uid);
+                } else {
+                    console.log('error sending message: ' + response + '\nError:'+error);
+                }
+            });
+        });
+    }
+    else if(ts.scraped.length > 0){
+        user.forEach(function(i){
+            var flockml = Mustache.render(messageTemplate, { category: "Tsunami",widgetURL: config.endpoint + '/scraps' });
+            console.log(flockml);
+            flock.callMethod('chat.sendMessage',config.botToken, {
+                to: i,
+                flockml: flockml
+                //onBehalfOf:event.userId
+            }, function(error,response) {
+                if (!error) {
+                    console.log('uid for message: ' + response.uid);
+                } else {
+                    console.log('error sending message: ' + response + '\nError:'+error);
+                }
+            });
+        });
+    }
 },10000)
 
 setInterval(function(){
