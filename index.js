@@ -170,21 +170,21 @@ setTimeout(function(){
     // });
     if(ff_scraped.length == 0 && ee_scraped.length == 0 && ts_scraped.length == 0 && vl_scraped.length == 0)
     {
-        user.forEach(function(i){
-            var flockml = Mustache.render(messageTemplate, { category: "Earthquake",widgetURL: config.endpoint + '/scraps' });
-            console.log(flockml);
-            flock.callMethod('chat.sendMessage',config.botToken, {
-                to: i,
-                flockml: flockml
-                //onBehalfOf:event.userId
-            }, function(error,response) {
-                if (!error) {
-                    console.log('uid for message: ' + response.uid);
-                } else {
-                    console.log('error sending message: ' + response + '\nError:'+error);
-                }
-            });
-        });
+        // user.forEach(function(i){
+        //     var flockml = Mustache.render(messageTemplate, { category: "Earthquake",widgetURL: config.endpoint + '/scraps' });
+        //     console.log(flockml);
+        //     flock.callMethod('chat.sendMessage',config.botToken, {
+        //         to: i,
+        //         flockml: flockml
+        //         //onBehalfOf:event.userId
+        //     }, function(error,response) {
+        //         if (!error) {
+        //             console.log('uid for message: ' + response.uid);
+        //         } else {
+        //             console.log('error sending message: ' + response + '\nError:'+error);
+        //         }
+        //     });
+        // });
     }
 
     else if(ff.scraped.length > 0){
@@ -204,7 +204,7 @@ setTimeout(function(){
         });
     });
     }
-    else if(ee.scraped.length > 0){
+    else if(ee.scraped.length > 0 || dummy){
         user.forEach(function(i){
             var flockml = Mustache.render(messageTemplate, { category: "Earthquake",widgetURL: config.endpoint + '/scraps' });
             console.log(flockml);
