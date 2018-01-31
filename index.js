@@ -12,7 +12,7 @@ var ip = require('request-ip')
 const request= require('request');
 const fs=require('fs');
 const short=require('./short');
-var country='Indonesia';
+var country='India';
 short._short(country);
 const eq=require('./earthquake');
 eq._eq(country);
