@@ -187,7 +187,7 @@ setTimeout(function(){
         // });
     }
 
-    if(ff.scraped.length > 0){
+    if(ff_scraped.length > 0){
     user.forEach(function(i){
         var flockml = Mustache.render(messageTemplate, { category: "Forest Fire",widgetURL: config.endpoint + '/scraps' });
         console.log(flockml);
@@ -204,7 +204,7 @@ setTimeout(function(){
         });
     });
     }
-     if(ee.scraped.length > 0 || dummy){
+     if(ee_scraped.length > 0 || dummy){
         user.forEach(function(i){
             var flockml = Mustache.render(messageTemplate, { category: "Earthquake",widgetURL: config.endpoint + '/scraps' });
             console.log(flockml);
@@ -221,7 +221,7 @@ setTimeout(function(){
             });
         });
     }
-     if(vl.scraped.length > 0){
+     if(vl_scraped.length > 0){
         user.forEach(function(i){
             var flockml = Mustache.render(messageTemplate, { category: "Volcano Eruption",widgetURL: config.endpoint + '/scraps' });
             console.log(flockml);
@@ -238,7 +238,7 @@ setTimeout(function(){
             });
         });
     }
-     if(ts.scraped.length > 0){
+     if(ts_scraped.length > 0){
         user.forEach(function(i){
             var flockml = Mustache.render(messageTemplate, { category: "Tsunami",widgetURL: config.endpoint + '/scraps' });
             console.log(flockml);
